@@ -6,9 +6,17 @@
 package ibacz.controllers;
 
 import ibacz.pojo.Student;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Map;
+import javax.validation.Valid;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,24 +31,25 @@ public class RegisterController {
     
     @RequestMapping(method = RequestMethod.GET)
     public String viewRegistration(ModelMap model) {
-        Student studentForm = new Student(); 
-        model.put("studentForm", studentForm);
+        model.addAttribute("student", new Student());
          
         return "StudentRegistration";
     }
      
     @RequestMapping(method = RequestMethod.POST)
-    public String processRegistration(@ModelAttribute("studentForm") Student student,
-            Map<String, Object> model) {
+    public String processRegistration(@Valid Student student, BindingResult result) {
          
         // implement your own registration logic here...
-         
-        // for testing purpose:
-        System.out.println("username: " + student.getName());
-        System.out.println("surname: " + student.getSurname());
-        System.out.println("birth date: " + student.getBirth());
-        System.out.println("gender: " + student.getGender());
-         
-        return "RegistrationSuccess";
+        
+        if(result.hasErrors()){
+            return "StudentRegistration";
+        }else{
+            return "RegistrationSuccess";
+        }
+    }
+    
+    @InitBinder     
+    public void initBinder(WebDataBinder binder){
+         binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("dd.MM.yyyy"), true));   
     }
 }

@@ -7,6 +7,10 @@ package ibacz.pojo;
 
 import ibacz.common.Enums.Gender;
 import java.time.LocalDate;
+import java.util.Date;
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -14,11 +18,19 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @author Kristian Mateka
  */
 public class Student {
+    
+    @Size(message = "Field name must be in range 1 - 50", min = 1, max = 50)
+    @Pattern(message = "Field name can contain only letters", regexp = "[a-zA-Z]+")
     private String name;
+    
+    @Size(message = "Field surname must be in range 1 - 50", min = 1, max = 50)
+    @Pattern(message = "Field surname can contain only letters", regexp = "[a-zA-Z]+")
     private String surname;
     
     @DateTimeFormat(pattern = "dd.MM.yyyy")
-    private LocalDate birth;
+//    @Past
+    private Date birth;
+    
     private Gender gender;
 
     public Student() {
@@ -40,13 +52,14 @@ public class Student {
         this.surname = surname;
     }
 
-    public LocalDate getBirth() {
+    public Date getBirth() {
         return birth;
     }
 
-    public void setBirth(LocalDate birth) {
+    public void setBirth(Date birth) {
         this.birth = birth;
     }
+
 
     public Gender getGender() {
         return gender;
