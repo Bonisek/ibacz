@@ -6,6 +6,7 @@
 package ibacz.controllers;
 
 import ibacz.pojo.Student;
+import ibacz.service.StudentServiceImpl;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
@@ -26,25 +27,33 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author Kristian Mateka
  */
 @Controller
-@RequestMapping(value = "/register")
-public class RegisterController {
+@RequestMapping(value = "/student")
+public class StudentController {
     
-    @RequestMapping(method = RequestMethod.GET)
+    private final StudentServiceImpl manager = new StudentServiceImpl();
+    
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String index(ModelMap model) {
+        
+        model.addAttribute("list", manager.getStudents());
+        
+        return "studentIndex";
+    }
+    
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String viewRegistration(ModelMap model) {
         model.addAttribute("student", new Student());
          
         return "StudentRegistration";
     }
      
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String processRegistration(@Valid Student student, BindingResult result) {
-         
-        // implement your own registration logic here...
-        
         if(result.hasErrors()){
             return "StudentRegistration";
         }else{
-            return "RegistrationSuccess";
+            manager.createStudent(student);
+            return "redirect:/student/index";
         }
     }
     

@@ -23,7 +23,7 @@
         <title>IBACZ</title>
     </head>
     <body>
-        <h1>Hello</h1>
+        <a href="/test/student/index">student index</a>
         <c:out value= "Hello Iba"/>
         <c:forEach begin="2" end="${param.x}" step="1">
             <c:out value= "Hello Iba"/>
