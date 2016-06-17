@@ -5,7 +5,7 @@
  */
 package ibacz.service;
 
-import ibacz.model.Student;
+import ibacz.pojo.Student;
 import java.util.Collection;
 
 /**

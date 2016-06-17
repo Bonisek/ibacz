@@ -5,7 +5,7 @@
  */
 package ibacz.controllers;
 
-import ibacz.model.Student;
+import ibacz.pojo.Student;
 import ibacz.service.StudentServiceImpl;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
