@@ -25,8 +25,8 @@
     <body>
         <h1>Hello</h1>
         <c:out value= "Hello Iba"/>
-            <c:forEach begin="2" end="${param.x}" step="1">
-                <c:out value= "Hello Iba"/>
-            </c:forEach>
+        <c:forEach begin="2" end="${param.x}" step="1">
+            <c:out value= "Hello Iba"/>
+        </c:forEach>
     </body>
 </html>
