@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ibacz.pojo;
+package ibacz.model;
 
 import ibacz.common.Enums.Gender;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import javax.validation.constraints.Past;
@@ -17,8 +18,10 @@ import org.springframework.format.annotation.DateTimeFormat;
  *
  * @author Kristian Mateka
  */
-public class Student {
+public class Student implements Serializable{
     
+    private static final long serialVersionUID = 1L;
+        
     @Size(message = "Field name must be in range 1 - 50", min = 1, max = 50)
     @Pattern(message = "Field name can contain only letters", regexp = "[a-zA-Z]+")
     private String name;

@@ -3,40 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ibacz.service;
+package student.bo;
 
 import ibacz.model.Student;
-import java.util.ArrayList;
+import ibacz.service.StudentService;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import student.dao.studentDao;
 
 /**
  *
  * @author Kristian Mateka
  */
-public class StudentServiceImpl implements StudentService{
+public class StudentServiceDbImpl implements StudentService{
     
-    private final List<Student> list;
-
-    public StudentServiceImpl() {
-        list = new ArrayList<>();
-    }
-
-    public List<Student> getList() {
-        return Collections.unmodifiableList(list);
-    }
+    studentDao studentDao;
     
     @Override
     public void createStudent(Student student) {
-        list.add(student);
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public void deleteStudent(Student student) {
-        if(!list.remove(student)){
-            // 
-        }
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -46,7 +35,7 @@ public class StudentServiceImpl implements StudentService{
 
     @Override
     public Collection<Student> getStudents() {
-        return getList();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
