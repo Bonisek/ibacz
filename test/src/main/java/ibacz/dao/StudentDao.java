@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ibacz.service;
+package ibacz.dao;
 
 import ibacz.models.Student;
 import java.util.Collection;
@@ -12,9 +12,9 @@ import java.util.Collection;
  *
  * @author Kristian Mateka
  */
-public interface StudentService {
+public interface StudentDao {
     void createStudent(Student student);
-    void deleteStudent(int id);
+    void deleteStudent(Student student);
     void editStudent(Student student);
     Student getStudent(int id);
     Collection<Student> getStudents();

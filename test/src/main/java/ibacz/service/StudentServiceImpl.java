@@ -5,7 +5,8 @@
  */
 package ibacz.service;
 
-import ibacz.pojo.Student;
+import ibacz.dao.StudentDao;
+import ibacz.models.Student;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -17,7 +18,14 @@ import java.util.List;
  */
 public class StudentServiceImpl implements StudentService{
     
+    // list was non-db entity holder
     private final List<Student> list;
+    
+    private StudentDao StudentDao;
+
+    public void setStudentDao(StudentDao StudentDao) {
+        this.StudentDao = StudentDao;
+    }
 
     public StudentServiceImpl() {
         list = new ArrayList<>();
@@ -29,24 +37,50 @@ public class StudentServiceImpl implements StudentService{
     
     @Override
     public void createStudent(Student student) {
+        student.setId(list.size());
         list.add(student);
+        
+        // StudentDao.createStudent(student);
     }
 
     @Override
-    public void deleteStudent(Student student) {
+    public void deleteStudent(int id) {
+        Student student = list.get(id);
         if(!list.remove(student)){
             // 
         }
+        // student = StudentDao.getStudent(id);
+        // StudentDao.deleteStudent(student);
     }
 
     @Override
     public void editStudent(Student student) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Student s = list.get(student.getId());
+        
+        s.setName(student.getName());
+        s.setSurname(student.getSurname());
+        s.setBirth(student.getBirth());
+        s.setGender(student.getGender());
+        
+        list.add(student.getId(), s);
+        // StudentDao.editStudent(student);
     }
 
     @Override
     public Collection<Student> getStudents() {
         return getList();
+        // return StudentDao.getStudents()
+    }
+
+    @Override
+    public Student getStudent(int id) {
+        if(id < list.size()){
+            return list.get(id);
+        }
+        
+        return null;
+        
+        // return StudentDao.getStudent(id);
     }
     
 }
